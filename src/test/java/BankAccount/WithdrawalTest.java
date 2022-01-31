@@ -28,4 +28,15 @@ public class WithdrawalTest {
 
         assertThat(two).isEqualTo(tony.getBalance());
     }
+
+    @Test
+    void should_return_same_balance_while_trying_withdrawal_amount_greater_than_the_balance(){
+        Amount fifteen = new Amount(15);
+        Amount twenty = new Amount(20);
+        BankAccount tony = new BankAccount(fifteen);
+
+        tony.withdrawal(twenty);
+
+        assertThat(fifteen).isEqualTo(tony.getBalance());
+    }
 }
