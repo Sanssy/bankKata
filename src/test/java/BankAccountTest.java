@@ -8,38 +8,47 @@ public class BankAccountTest {
     void should_return_a_balance_of_zero() {
         BankAccount patrick = new BankAccount();
 
-        assertThat(0).isEqualTo(patrick.getBalance());
+        Amount zero = new Amount(0);
+
+        assertThat(zero).isEqualTo(patrick.getBalance());
     }
 
     @Test
     void should_return_a_balance_of_one_after_deposit_of_one() {
         BankAccount patrick = new BankAccount();
 
-        patrick.deposit(1);
+        Amount one = new Amount(1);
 
-        assertThat(1).isEqualTo(patrick.getBalance());
+        patrick.deposit(one);
+
+        assertThat(one).isEqualTo(patrick.getBalance());
     }
 
     @Test
     void should_return_a_balance_of_two_after_two_deposits_of_one() {
         BankAccount Eddy = new BankAccount();
 
-        Eddy.deposit(1);
-        Eddy.deposit(1);
+        Amount one = new Amount(1);
+        Amount two = new Amount(2);
 
-        assertThat(2).isEqualTo(Eddy.getBalance());
+        Eddy.deposit(one);
+        Eddy.deposit(one);
+
+        assertThat(two).isEqualTo(Eddy.getBalance());
     }
 
     @Test
     void should_return_a_balance_of_ten_after_two_deposits_of_one_and_an_account_initialization_of_eight() {
-        BankAccount Eddy = new BankAccount(8);
+        Amount eight = new Amount(8);
+        BankAccount Eddy = new BankAccount(eight);
 
-        Eddy.deposit(1);
-        Eddy.deposit(1);
+        Amount one = new Amount(1);
+        Amount ten = new Amount(10);
 
-        assertThat(10).isEqualTo(Eddy.getBalance());
+        Eddy.deposit(one);
+        Eddy.deposit(one);
+
+        assertThat(ten).isEqualTo(Eddy.getBalance());
     }
-
-
 }
 

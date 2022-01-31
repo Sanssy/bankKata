@@ -1,18 +1,19 @@
 public class BankAccount {
-    private int balance;
+    private Amount balance;
 
     public BankAccount() {
+        this.balance = new Amount(0);
     }
 
-    public BankAccount(int balance) {
+    public BankAccount(Amount balance) {
         this.balance = balance;
     }
 
-    public int getBalance() {
-        return balance;
+    public Amount getBalance() {
+        return this.balance;
     }
 
-    public void deposit(int amount) {
-        balance += amount;
+    public void deposit(Amount amount) {
+        this.balance = this.balance.add(amount);
     }
 }
