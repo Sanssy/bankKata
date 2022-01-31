@@ -1,3 +1,5 @@
+package BankAccount;
+
 public record Amount(int value) {
 
     public Amount add(Amount amount) {

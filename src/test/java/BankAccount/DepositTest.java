@@ -1,8 +1,10 @@
+package BankAccount;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class BankAccountTest {
+public class DepositTest {
 
     @Test
     void should_return_a_balance_of_zero() {
