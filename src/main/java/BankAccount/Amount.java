@@ -7,6 +7,10 @@ public record Amount(int value) {
     }
 
     public Amount subtract(Amount amount) {
-        return new Amount(this.value - amount.value);
+        return this.add(amount.opposite());
+    }
+
+    private Amount opposite() {
+        return new Amount(- this.value);
     }
 }
