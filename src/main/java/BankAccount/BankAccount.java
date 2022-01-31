@@ -19,7 +19,7 @@ public class BankAccount {
         this.balance = this.balance.add(amount);
     }
 
-    public void withdrawal(Amount amout) {
-        this.balance = new Amount(0);
+    public void withdrawal(Amount amount) {
+        this.balance = this.balance.subtract(amount);
     }
 }
