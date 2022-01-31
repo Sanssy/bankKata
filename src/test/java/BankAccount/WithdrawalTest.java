@@ -30,6 +30,17 @@ public class WithdrawalTest {
     }
 
     @Test
+    void should_return_balance_of_zero_while_trying_withdrawal_amount_on_a_balance_of_zero(){
+        Amount ten = new Amount(10);
+        Amount zero = new Amount(0);
+        BankAccount bob = new BankAccount();
+
+        bob.withdrawal(ten);
+
+        assertThat(zero).isEqualTo(bob.getBalance());
+    }
+
+    @Test
     void should_return_same_balance_while_trying_withdrawal_amount_greater_than_the_balance(){
         Amount fifteen = new Amount(15);
         Amount twenty = new Amount(20);
