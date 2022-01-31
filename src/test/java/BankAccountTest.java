@@ -10,5 +10,14 @@ public class BankAccountTest {
 
         assertThat(0).isEqualTo(patrick.getBalance());
     }
+
+    @Test
+    void should_return_a_balance_of_one_after_deposit_of_one() {
+        BankAccount patrick = new BankAccount();
+
+        patrick.deposit(1);
+
+        assertThat(1).isEqualTo(patrick.getBalance());
+    }
 }
 
