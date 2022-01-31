@@ -21,7 +21,7 @@ public class BankAccountTest {
     }
 
     @Test
-    void should_return_a_balance_of_two_after_two_deposit_of_one() {
+    void should_return_a_balance_of_two_after_two_deposits_of_one() {
         BankAccount Eddy = new BankAccount();
 
         Eddy.deposit(1);
@@ -29,5 +29,17 @@ public class BankAccountTest {
 
         assertThat(2).isEqualTo(Eddy.getBalance());
     }
+
+    @Test
+    void should_return_a_balance_of_ten_after_two_deposits_of_one_and_an_account_initialization_of_eight() {
+        BankAccount Eddy = new BankAccount(8);
+
+        Eddy.deposit(1);
+        Eddy.deposit(1);
+
+        assertThat(10).isEqualTo(Eddy.getBalance());
+    }
+
+
 }
 
