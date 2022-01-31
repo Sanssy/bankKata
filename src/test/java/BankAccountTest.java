@@ -38,6 +38,14 @@ public class BankAccountTest {
     }
 
     @Test
+    void should_return_a_balance_of_ten_after_an_initialization_of_ten() {
+        Amount ten = new Amount(10);
+        BankAccount Eddy = new BankAccount(ten);
+
+        assertThat(ten).isEqualTo(Eddy.getBalance());
+    }
+
+    @Test
     void should_return_a_balance_of_ten_after_two_deposits_of_one_and_an_account_initialization_of_eight() {
         Amount eight = new Amount(8);
         BankAccount Eddy = new BankAccount(eight);
