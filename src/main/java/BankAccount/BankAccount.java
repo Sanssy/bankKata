@@ -5,7 +5,8 @@ import java.util.List;
 
 public class BankAccount {
     private Amount balance;
-    private List<String> history = new ArrayList<>();
+    private final List<String> history = new ArrayList<>();
+    private final StringBuilder statement = new StringBuilder();
 
 
     public BankAccount() {
@@ -14,6 +15,7 @@ public class BankAccount {
 
     public BankAccount(Amount balance) {
         this.balance = balance;
+        recordStatement("DEPOSIT", balance);
     }
 
     public Amount getBalance() {
@@ -21,7 +23,20 @@ public class BankAccount {
     }
 
     public void deposit(Amount amount) {
+        String deposit = "DEPOSIT";
         this.balance = this.balance.add(amount);
+        recordStatement(deposit, amount);
+    }
+
+    private void recordStatement(String type, Amount amount) {
+        statement
+                .append(type)
+                .append(", ")
+                .append("08/02/2022")
+                .append(", ")
+                .append(amount.value())
+                .append(", ")
+                .append(balance.value());
     }
 
     public void withdrawal(Amount amount) {
@@ -30,7 +45,7 @@ public class BankAccount {
 
     public List<String> history() {
         if (balance.value() > 0)
-            history.add("DEPOSIT, 08/02/2022, 10, 10");
+            history.add(statement.toString());
         return history;
     }
 }
