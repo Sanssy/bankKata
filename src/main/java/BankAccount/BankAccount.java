@@ -1,6 +1,7 @@
 package BankAccount;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BankAccount {
@@ -21,17 +22,19 @@ public class BankAccount {
     }
 
     public void deposit(Amount amount) {
-        this.balance = this.balance.add(amount);
         recordStatement(OperationsType.DEPOSIT, amount, balance);
     }
 
     public void withdrawal(Amount amount) {
-        this.balance = this.balance.subtract(amount);
         recordStatement(OperationsType.WITHDRAWAL, amount, balance);
 
     }
 
     private void recordStatement(OperationsType type, Amount amount, Amount balance) {
+        Transaction transaction = new Transaction(type, new Date(), amount, balance);
+
+        this.balance = transaction.updateBalance();
+
         statement =  new StringBuilder()
                 .append(type)
                 .append(", ")
@@ -39,7 +42,7 @@ public class BankAccount {
                 .append(", ")
                 .append(amount.value())
                 .append(", ")
-                .append(balance.value());
+                .append(this.balance.value());
 
         history.add(statement.toString());
     }
