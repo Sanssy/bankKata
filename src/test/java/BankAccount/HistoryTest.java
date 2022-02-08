@@ -45,4 +45,16 @@ public class HistoryTest {
         assertEquals(List.of("DEPOSIT, 08/02/2022, 20, 20", "DEPOSIT, 08/02/2022, 50, 70"), max.history());
     }
 
+    @Test
+    void should_return_an_history_of_an_account_with_different_transaction_type() {
+        Amount twenty = new Amount(20);
+        Amount fifty = new Amount(50);
+        BankAccount marco = new BankAccount();
+
+        marco.deposit(fifty);
+        marco.withdrawal(twenty);
+
+        assertEquals(List.of("DEPOSIT, 08/02/2022, 50, 50", "WITHDRAWAL, 08/02/2022, 20, 30"), marco.history());
+    }
+
 }

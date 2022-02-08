@@ -28,6 +28,13 @@ public class BankAccount {
         recordStatement(deposit, amount);
     }
 
+    public void withdrawal(Amount amount) {
+        String withdrawal = "WITHDRAWAL";
+        this.balance = this.balance.subtract(amount);
+        recordStatement(withdrawal, amount);
+
+    }
+
     private void recordStatement(String type, Amount amount) {
         statement =  new StringBuilder()
                 .append(type)
@@ -39,10 +46,6 @@ public class BankAccount {
                 .append(balance.value());
 
         history.add(statement.toString());
-    }
-
-    public void withdrawal(Amount amount) {
-        this.balance = this.balance.subtract(amount);
     }
 
     public List<String> history() {
