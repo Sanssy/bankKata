@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TransactionTest {
 
     @Test
-    void should_return_a_transaction() throws ParseException {
-
+    void should_return_a_balance_of_ten_after_the_transaction_happened() throws ParseException {
         Amount ten = new Amount(10);
         Amount zero = new Amount(0);
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse("08/02/2022");
