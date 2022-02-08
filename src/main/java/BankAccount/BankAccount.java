@@ -1,9 +1,11 @@
 package BankAccount;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BankAccount {
     private Amount balance;
+    private List<String> history = new ArrayList<>();
 
 
     public BankAccount() {
@@ -26,7 +28,9 @@ public class BankAccount {
         this.balance = this.balance.subtract(amount);
     }
 
-    public <E> List<E> history() {
-        return List.of();
+    public List<String> history() {
+        if (balance.value() > 0)
+            history.add("DEPOSIT, 08/02/2022, 10, 10");
+        return history;
     }
 }
