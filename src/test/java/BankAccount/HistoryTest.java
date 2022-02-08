@@ -57,4 +57,31 @@ public class HistoryTest {
         assertEquals(List.of("DEPOSIT, 08/02/2022, 50, 50", "WITHDRAWAL, 08/02/2022, 20, 30"), marco.history());
     }
 
+    @Test
+    void should_return_an_history_of_an_account_with_several_transactions() {
+        Amount twenty = new Amount(20);
+        Amount ten = new Amount(10);
+        Amount fifty = new Amount(50);
+        Amount hundred = new Amount(100);
+        BankAccount marco = new BankAccount();
+
+        marco.deposit(fifty);
+        marco.deposit(hundred);
+        marco.withdrawal(ten);
+        marco.withdrawal(twenty);
+        marco.deposit(hundred);
+        marco.withdrawal(fifty);
+        marco.withdrawal(ten);
+
+        assertEquals(List.of(
+                "DEPOSIT, 08/02/2022, 50, 50",
+                "DEPOSIT, 08/02/2022, 100, 150",
+                "WITHDRAWAL, 08/02/2022, 10, 140",
+                "WITHDRAWAL, 08/02/2022, 20, 120",
+                "DEPOSIT, 08/02/2022, 100, 220",
+                "WITHDRAWAL, 08/02/2022, 50, 170",
+                "WITHDRAWAL, 08/02/2022, 10, 160"
+        ), marco.history());
+    }
+
 }
