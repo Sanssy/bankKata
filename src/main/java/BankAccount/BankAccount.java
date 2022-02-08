@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankAccount {
-    private Amount balance;
+    private Amount balance = new Amount(0);
     private final List<String> history = new ArrayList<>();
     private StringBuilder statement;
 
 
     public BankAccount() {
-        this.balance = new Amount(0);
     }
 
-    public BankAccount(Amount balance) {
-        this.balance = balance;
-        recordStatement("DEPOSIT", balance);
+    public BankAccount(Amount amount) {
+        deposit(amount);
     }
 
     public Amount getBalance() {
@@ -25,17 +23,17 @@ public class BankAccount {
     public void deposit(Amount amount) {
         String deposit = "DEPOSIT";
         this.balance = this.balance.add(amount);
-        recordStatement(deposit, amount);
+        recordStatement(deposit, amount, balance);
     }
 
     public void withdrawal(Amount amount) {
         String withdrawal = "WITHDRAWAL";
         this.balance = this.balance.subtract(amount);
-        recordStatement(withdrawal, amount);
+        recordStatement(withdrawal, amount, balance);
 
     }
 
-    private void recordStatement(String type, Amount amount) {
+    private void recordStatement(String type, Amount amount, Amount balance) {
         statement =  new StringBuilder()
                 .append(type)
                 .append(", ")
