@@ -2,7 +2,6 @@ package BankAccount;
 
 import utils.DateConverter;
 
-import java.text.ParseException;
 import java.util.Date;
 
 public class Transaction {
@@ -20,18 +19,18 @@ public class Transaction {
     }
 
     public Amount updateBalance() {
-        if (operationsType.equals(OperationsType.DEPOSIT))
-            return balance = balance.add(amount);
-        return balance = balance.subtract(amount);
+        if (this.operationsType.equals(OperationsType.DEPOSIT))
+            return this.balance = this.balance.add(this.amount);
+        return this.balance = this.balance.subtract(this.amount);
     }
 
     public String details() {
-        return operationsType +
+        return this.operationsType+
                 ", " +
-                DateConverter.formatDate(date) +
+                DateConverter.formatDate(this.date) +
                 ", " +
-                amount.value() +
+                this.amount.value() +
                 ", " +
-                balance.value();
+                this.balance.value();
     }
 }

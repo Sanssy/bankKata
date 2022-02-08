@@ -1,14 +1,12 @@
 package BankAccount;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class BankAccount {
-    private Amount balance = new Amount(0);
-    private final List<String> history = new ArrayList<>();
-    private StringBuilder statement;
 
+    private Amount balance = new Amount(0);
+    private final Statement statement = new Statement();
 
     public BankAccount() {
     }
@@ -27,7 +25,6 @@ public class BankAccount {
 
     public void withdrawal(Amount amount) {
         recordStatement(OperationsType.WITHDRAWAL, amount, this.balance);
-
     }
 
     private void recordStatement(OperationsType type, Amount amount, Amount balance) {
@@ -35,12 +32,11 @@ public class BankAccount {
 
         this.balance = transaction.updateBalance();
 
-        this.statement = new StringBuilder(transaction.details());
-
-        this.history.add(this.statement.toString());
+        this.statement.addTransaction(transaction);
     }
 
     public List<String> history() {
-        return this.history;
+        return this.statement.consult();
     }
+
 }
