@@ -6,7 +6,7 @@ import java.util.List;
 public class BankAccount {
     private Amount balance;
     private final List<String> history = new ArrayList<>();
-    private final StringBuilder statement = new StringBuilder();
+    private StringBuilder statement;
 
 
     public BankAccount() {
@@ -29,7 +29,7 @@ public class BankAccount {
     }
 
     private void recordStatement(String type, Amount amount) {
-        statement
+        statement =  new StringBuilder()
                 .append(type)
                 .append(", ")
                 .append("08/02/2022")
@@ -37,6 +37,8 @@ public class BankAccount {
                 .append(amount.value())
                 .append(", ")
                 .append(balance.value());
+
+        history.add(statement.toString());
     }
 
     public void withdrawal(Amount amount) {
@@ -44,8 +46,6 @@ public class BankAccount {
     }
 
     public List<String> history() {
-        if (balance.value() > 0)
-            history.add(statement.toString());
         return history;
     }
 }

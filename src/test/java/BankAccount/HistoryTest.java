@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HistoryTest {
 
@@ -31,6 +31,18 @@ public class HistoryTest {
         henry.deposit(twenty);
 
         assertEquals(List.of("DEPOSIT, 08/02/2022, 20, 20"), henry.history());
+    }
+
+    @Test
+    void should_return_an_history_of_an_account_with_two_same_transaction_type() {
+        Amount twenty = new Amount(20);
+        Amount fifty = new Amount(50);
+        BankAccount max = new BankAccount();
+
+        max.deposit(twenty);
+        max.deposit(fifty);
+
+        assertEquals(List.of("DEPOSIT, 08/02/2022, 20, 20", "DEPOSIT, 08/02/2022, 50, 70"), max.history());
     }
 
 }
