@@ -22,11 +22,11 @@ public class BankAccount {
     }
 
     public void deposit(Amount amount) {
-        recordStatement(OperationsType.DEPOSIT, amount, balance);
+        recordStatement(OperationsType.DEPOSIT, amount, this.balance);
     }
 
     public void withdrawal(Amount amount) {
-        recordStatement(OperationsType.WITHDRAWAL, amount, balance);
+        recordStatement(OperationsType.WITHDRAWAL, amount, this.balance);
 
     }
 
@@ -35,19 +35,12 @@ public class BankAccount {
 
         this.balance = transaction.updateBalance();
 
-        statement =  new StringBuilder()
-                .append(type)
-                .append(", ")
-                .append("08/02/2022")
-                .append(", ")
-                .append(amount.value())
-                .append(", ")
-                .append(this.balance.value());
+        this.statement = new StringBuilder(transaction.details());
 
-        history.add(statement.toString());
+        this.history.add(this.statement.toString());
     }
 
     public List<String> history() {
-        return history;
+        return this.history;
     }
 }
