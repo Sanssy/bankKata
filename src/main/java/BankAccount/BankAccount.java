@@ -21,19 +21,17 @@ public class BankAccount {
     }
 
     public void deposit(Amount amount) {
-        String deposit = "DEPOSIT";
         this.balance = this.balance.add(amount);
-        recordStatement(deposit, amount, balance);
+        recordStatement(OperationsType.DEPOSIT, amount, balance);
     }
 
     public void withdrawal(Amount amount) {
-        String withdrawal = "WITHDRAWAL";
         this.balance = this.balance.subtract(amount);
-        recordStatement(withdrawal, amount, balance);
+        recordStatement(OperationsType.WITHDRAWAL, amount, balance);
 
     }
 
-    private void recordStatement(String type, Amount amount, Amount balance) {
+    private void recordStatement(OperationsType type, Amount amount, Amount balance) {
         statement =  new StringBuilder()
                 .append(type)
                 .append(", ")
