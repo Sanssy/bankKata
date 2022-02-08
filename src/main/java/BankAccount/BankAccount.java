@@ -1,7 +1,10 @@
 package BankAccount;
 
+import java.util.List;
+
 public class BankAccount {
     private Amount balance;
+
 
     public BankAccount() {
         this.balance = new Amount(0);
@@ -21,5 +24,9 @@ public class BankAccount {
 
     public void withdrawal(Amount amount) {
         this.balance = this.balance.subtract(amount);
+    }
+
+    public <E> List<E> history() {
+        return List.of();
     }
 }
