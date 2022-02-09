@@ -7,32 +7,37 @@ public class BankAccount {
 
     private Amount balance = new Amount(0);
     private final Statement statement = new Statement();
+    private Transaction transaction;
 
     public BankAccount() {
     }
 
     public BankAccount(Amount amount) {
-        deposit(amount);
+        this.balance = amount;
+    }
+
+    public BankAccount(Amount amount, Date date) {
+        this.deposit(amount, date);
     }
 
     public Amount getBalance() {
         return this.balance;
     }
 
-    public void deposit(Amount amount) {
-        recordStatement(OperationsType.DEPOSIT, amount, this.balance);
+    public void deposit(Amount amount, Date date) {
+        recordStatement(OperationsType.DEPOSIT, date, amount);
     }
 
-    public void withdrawal(Amount amount) {
-        recordStatement(OperationsType.WITHDRAWAL, amount, this.balance);
+    public void withdrawal(Amount amount, Date date) {
+        recordStatement(OperationsType.WITHDRAWAL, date, amount);
     }
 
-    private void recordStatement(OperationsType type, Amount amount, Amount balance) {
-        Transaction transaction = new Transaction(type, new Date(), amount, balance);
+    private void recordStatement(OperationsType type, Date date, Amount amount) {
+        this.transaction = new Transaction(type, date, amount, balance);
 
-        this.balance = transaction.updateBalance();
+        this.balance = this.transaction.updateBalance();
 
-        this.statement.addTransaction(transaction);
+        this.statement.addTransaction(this.transaction);
     }
 
     public List<String> history() {

@@ -1,8 +1,12 @@
 package BankAccount;
 
 import org.junit.jupiter.api.Test;
+import utils.DateConverter;
 
-import static org.assertj.core.api.Assertions.*;
+import java.text.ParseException;
+import java.util.Date;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DepositTest {
 
@@ -16,25 +20,26 @@ public class DepositTest {
     }
 
     @Test
-    void should_return_a_balance_of_one_after_deposit_of_one() {
+    void should_return_a_balance_of_one_after_deposit_of_one() throws ParseException {
         BankAccount patrick = new BankAccount();
-
         Amount one = new Amount(1);
+        Date date = DateConverter.convertToDate("08/02/2022");
 
-        patrick.deposit(one);
+        patrick.deposit(one, date);
 
         assertThat(one).isEqualTo(patrick.getBalance());
     }
 
     @Test
-    void should_return_a_balance_of_two_after_two_deposits_of_one() {
+    void should_return_a_balance_of_two_after_two_deposits_of_one() throws ParseException {
         BankAccount Eddy = new BankAccount();
 
         Amount one = new Amount(1);
         Amount two = new Amount(2);
+        Date date = DateConverter.convertToDate("08/02/2022");
 
-        Eddy.deposit(one);
-        Eddy.deposit(one);
+        Eddy.deposit(one, date);
+        Eddy.deposit(one, date);
 
         assertThat(two).isEqualTo(Eddy.getBalance());
     }
@@ -48,15 +53,15 @@ public class DepositTest {
     }
 
     @Test
-    void should_return_a_balance_of_ten_after_two_deposits_of_one_and_an_account_initialization_of_eight() {
+    void should_return_a_balance_of_ten_after_two_deposits_of_one_and_an_account_initialization_of_eight() throws ParseException {
         Amount eight = new Amount(8);
         BankAccount Eddy = new BankAccount(eight);
-
         Amount one = new Amount(1);
         Amount ten = new Amount(10);
+        Date date = DateConverter.convertToDate("08/02/2022");
 
-        Eddy.deposit(one);
-        Eddy.deposit(one);
+        Eddy.deposit(one, date);
+        Eddy.deposit(one, date);
 
         assertThat(ten).isEqualTo(Eddy.getBalance());
     }

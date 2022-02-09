@@ -1,13 +1,18 @@
 package utils;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateConverter {
-    public static String formatDate(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    private static final SimpleDateFormat dateFormat =  new SimpleDateFormat("dd/MM/yyyy");
+
+    public static String formatDate(Date date) {
         return dateFormat.format(date);
+    }
+
+    public static Date convertToDate(String stringDate) throws ParseException {
+        return dateFormat.parse(stringDate);
     }
 }
