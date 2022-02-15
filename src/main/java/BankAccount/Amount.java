@@ -6,21 +6,11 @@ public record Amount(int value) {
         return new Amount(this.value + amount.value);
     }
 
-    public Amount subtract(Amount amount) {
-        if (isGreaterThanOrEqualsTo(amount))
-            return this.add(amount.opposite());
-        return this.add(amountOfZero());
-    }
-
     public Amount opposite() {
         return new Amount(- this.value);
     }
 
-    private boolean isGreaterThanOrEqualsTo(Amount amount) {
-        return this.value >= amount.value;
-    }
-
-    private Amount amountOfZero() {
-        return new Amount(0);
+    public Amount absolute() {
+        return new Amount(Math.abs(this.value));
     }
 }

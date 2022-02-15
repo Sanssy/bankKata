@@ -1,62 +1,65 @@
 package BankAccount;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.DateConverter;
+import utils.DateProvider;
 
-import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WithdrawalTest {
+    LocalDate dateProvider;
 
-    @Test
-    void should_return_a_balance_of_zero_after_a_withdrawal_of_one_on_a_balance_of_one() throws ParseException {
-        Amount one = new Amount(1);
-        Amount zero = new Amount(0);
-        BankAccount tony = new BankAccount(one);
-        Date date = DateConverter.convertToDate("08/02/2022");
-
-        tony.withdrawal(one, date);
-
-        assertThat(zero).isEqualTo(tony.getBalance());
+    @BeforeEach
+    void dateMocked() {
+        dateProvider = DateProvider.today();
     }
 
     @Test
-    void should_return_a_balance_of_two_after_a_withdrawal_of_one_on_a_balance_of_three() throws ParseException {
+    void should_return_a_balance_of_zero_after_a_withdrawal_of_one_on_a_balance_of_one() {
+        Amount one = new Amount(1);
+        Amount zero = new Amount(0);
+        BankAccount tony = new BankAccount(one);
+
+        tony.withdrawal(one, dateProvider);
+
+        assertThat(zero).isEqualTo(tony.balance());
+    }
+
+    @Test
+    void should_return_a_balance_of_two_after_a_withdrawal_of_one_on_a_balance_of_three() {
         Amount one = new Amount(1);
         Amount two = new Amount(2);
         Amount three = new Amount(3);
         BankAccount tony = new BankAccount(three);
-        Date date = DateConverter.convertToDate("08/02/2022");
 
-        tony.withdrawal(one, date);
+        tony.withdrawal(one, dateProvider);
 
-        assertThat(two).isEqualTo(tony.getBalance());
+        assertThat(two).isEqualTo(tony.balance());
     }
 
     @Test
-    void should_return_balance_of_zero_while_trying_withdrawal_amount_on_a_balance_of_zero() throws ParseException {
+    void should_return_a_negative_balance_after_a_withdrawal_of_ten_on_a_balance_of_zero() {
         Amount ten = new Amount(10);
-        Amount zero = new Amount(0);
+        Amount oppositeTen = ten.opposite();
         BankAccount bob = new BankAccount();
-        Date date = DateConverter.convertToDate("08/02/2022");
 
-        bob.withdrawal(ten, date);
+        bob.withdrawal(ten, dateProvider);
 
-        assertThat(zero).isEqualTo(bob.getBalance());
+        assertThat(oppositeTen).isEqualTo(bob.balance());
     }
 
     @Test
-    void should_return_same_balance_while_trying_withdrawal_amount_greater_than_the_balance() throws ParseException {
+    void should_return_a_negative_balance_after_a_withdrawal_of_twenty_on_a_balance_of_fifteen() {
         Amount fifteen = new Amount(15);
         Amount twenty = new Amount(20);
-        Date date = DateConverter.convertToDate("08/02/2022");
+        Amount oppositeFive = new Amount(5).opposite();
         BankAccount tony = new BankAccount(fifteen);
 
-        tony.withdrawal(twenty, date);
+        tony.withdrawal(twenty, dateProvider);
 
-        assertThat(fifteen).isEqualTo(tony.getBalance());
+        assertThat(oppositeFive).isEqualTo(tony.balance());
     }
 
 }
